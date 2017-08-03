@@ -1,0 +1,8 @@
+@import "variables";
+@mixin borderTransparent{
+  border-bottom: 3px solid transparent;
+}
+
+@mixin borderUnderline{
+  border-bottom: 3px solid $underline;
+}

@@ -1,0 +1,79 @@
+@import "flexgrid";
+@import "fontello";
+@import "reset";
+@import "variables";
+@import "mixins";
+
+.container{
+  max-width: 45em;
+  border-bottom: 1em solid $headerColor;
+}
+
+#header{
+  background: $headerColor;
+}
+
+#menu{
+  background: $headerColor;
+  padding: 5px;
+}
+
+#menu-input{
+  input{
+    padding-left: 5px;
+    height: 2.98em;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    color: $fontColor;
+    background: $menuButtons;
+    @include borderTransparent;
+    &:focus{
+      @include borderUnderline;
+      outline: none;
+    }
+  }
+}
+
+#buttons-group{
+  padding-right: 20px;
+  a{
+    color: $fontColor;
+    background: $menuButtons;
+    padding: 0.8em;
+    border-radius: 5px;
+    @include borderTransparent;
+    &:hover{
+      @include borderUnderline;
+    }
+    &:active{
+      color: $fontColor;
+      @include borderUnderline;
+    }
+  }
+}
+
+.item{
+  &:nth-of-type(odd) {
+    background: darken(#9fa0ff, 1);
+  }
+  &:nth-of-type(even) {
+    background: lighten(#9fa0ff, 3);;
+  }
+  a:active{
+    color: $fontColor;
+  }
+}
+
+.item-size {
+  height: 8em;
+}
+
+#online-header-box,
+#offline-header-box{
+  background: $headerColor;
+  text-align: center;
+}
+
+
