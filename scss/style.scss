@@ -9,6 +9,13 @@
   border-bottom: 1em solid $headerColor;
 }
 
+a{
+  cursor: pointer;
+  color: $fontColor;
+  display: inline-block;
+  padding: 3em;
+}
+
 #header{
   background: $headerColor;
 }
@@ -18,26 +25,9 @@
   padding: 5px;
 }
 
-#menu-input{
-  input{
-    padding-left: 5px;
-    height: 2.98em;
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    font-size: 1em;
-    color: $fontColor;
-    background: $menuButtons;
-    @include borderTransparent;
-    &:focus{
-      @include borderUnderline;
-      outline: none;
-    }
-  }
-}
-
 #buttons-group{
   padding-right: 20px;
+  padding-left: 20px;
   a{
     color: $fontColor;
     background: $menuButtons;
@@ -63,6 +53,20 @@
   }
   a:active{
     color: $fontColor;
+  }
+  img{
+    width: 70px;
+    height: 70px;
+  }
+  .icon-online, .icon-offline{
+    width: 30px;
+    height: 30px;
+  }
+  .info{
+    font-size: 0.8em;
+  }
+  em{
+    font-weight: bold;
   }
 }
 
