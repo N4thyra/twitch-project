@@ -8,19 +8,13 @@ $(() => {
 
   STREAMERS.forEach(streamer => {
     $.getJSON(URL+streamer, (data) => {
-      if(data.stream === null || data.stream === undefined) {
-        off = offline(streamer);
-
-        $('#offline').append(off);
+      if (data.stream === null || data.stream === undefined) {
+        $("#offline").append(output(streamer));
       } else {
         const logo   = data.stream.channel.logo,
           channelURL = data.stream.channel.url,
-          status     = data.stream.channel.status;
-        on = online(streamer, logo, channelURL, status);
-
-        console.log(data);
-
-        $('#online').append(on);
+          status = data.stream.channel.status;
+        $("#online").append(output(streamer, logo, channelURL, status));
       }
     });
 
@@ -45,28 +39,31 @@ $(() => {
   });
 
   // make HTML out of strings
-  function offline(streamer){
-    let output = `
-    <div class="col-xs-12 item">
-        <div class="row center middle item-size">
-          <div class="col-xs-4 avatar"><img src="https://maxcdn.icons8.com/Share/icon/Messaging//offline1600.png" alt="${streamer}"></div>
-          <div class="col-xs-4 content">${streamer}</div>
-          <div class="col-xs-4 del"><img class="icon-offline" src="https://images-na.ssl-images-amazon.com/images/I/719zM3RmAxL.png"></div>
-        </div>
-      </div>`;
-    return output;
-  }
-
-  function online(streamer, logo, url, status){
-    let output = `
+  function output(streamer, logo="https://maxcdn.icons8.com/Share/icon/Messaging//offline1600.png", url=null, status=null){
+    const onOrOff = status ? 'online' : 'offline';
+    const imageSection = `<img src="${logo}" alt="${streamer}">`;
+    const avatarSection = {
+      online: `<a href="${url}" target="_blank">${imageSection}</a>`,
+      offline: imageSection
+    };
+    const contentSection = {
+      online: `<a href="${url}" target="_blank"><em>${streamer}</em> - <span class="info">${status}</span></a>`,
+      offline:`${streamer}`
+    };
+    const statusIcon = {
+      online: "https://phpfoxexpert.com/products/uploads/824_1.png",
+      offline: "https://images-na.ssl-images-amazon.com/images/I/719zM3RmAxL.png"
+    };
+    return  `
          <div class="col-xs-12 item">
             <div class="row center middle item-size">
-              <div class="col-xs-4 avatar"><a href="${url}" target="_blank"><img src="${logo}" alt="${streamer}"></a></div>
-              <div class="col-xs-4 content"><a href="${url}" target="_blank"><em>${streamer}</em> - <span class="info">${status}</span></a></div>
-              <div class="col-xs-4 del"><img class="icon-online" src="https://phpfoxexpert.com/products/uploads/824_1.png"></div>
+              <div class="col-xs-4 avatar">${avatarSection[onOrOff]}</div>
+              <div class="col-xs-6 content">${contentSection[onOrOff]}</div>
+              <div class="col-xs-2 del"><img class="icon-${onOrOff}" src="${statusIcon[onOrOff]}"></div>
             </div>
-          </div>`;
-    return output;
+          </div>    
+    `;
   }
+
 
 });

@@ -544,8 +544,7 @@ a {
 a {
   cursor: pointer;
   color: #000;
-  display: inline-block;
-  padding: 3em; }
+  display: inline-block; }
 
 #header {
   background: #9fa0ff; }
